@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9966ff86d8b88d34fa26143d626329de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  stopDistance: 1
+  _speed: 3
+  _stopDistance: 1
 --- !u!114 &-6240880681686158046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,9 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38cdcf26efa9a24da4dd0276fb515ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  attackRange: 1.7
-  attackRate: 2
+  _damage: 1
+  _attackRange: 1.7
+  _attackRate: 2
 --- !u!114 &8241474557738997948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1d5815cc94502468145025a6abf6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  healthSlider: {fileID: 6279828557602654657}
+  _maxHealth: 5
+  _healthSlider: {fileID: 6279828557602654657}
 --- !u!1 &6031520535838562821
 GameObject:
   m_ObjectHideFlags: 0

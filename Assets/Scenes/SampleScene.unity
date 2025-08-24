@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 124952ab56e04ad4e8a7c3623218391d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 2378368633144395107}
-  gameOverPanel: {fileID: 35509947}
+  _playerHealth: {fileID: 2378368633144395107}
+  _gameOverPanel: {fileID: 35509947}
 --- !u!1 &35509947
 GameObject:
   m_ObjectHideFlags: 0
@@ -7957,15 +7957,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014d0271addfdb4498ea35f17c8b64cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 2378368633144395107}
-  hearts:
+  _playerHealth: {fileID: 2378368633144395107}
+  _hearts:
   - {fileID: 2142838624768478726}
   - {fileID: 619782276}
   - {fileID: 134954331}
   - {fileID: 1107036951}
   - {fileID: 709304232}
-  fullHeart: {fileID: 21300000, guid: 4217838d18d06c04fbb38361be7b975f, type: 3}
-  emptyHeart: {fileID: 21300000, guid: 2b128a5e4d59a054e9193a83052697e3, type: 3}
+  _fullHeart: {fileID: 21300000, guid: 4217838d18d06c04fbb38361be7b975f, type: 3}
+  _emptyHeart: {fileID: 21300000, guid: 2b128a5e4d59a054e9193a83052697e3, type: 3}
 --- !u!1001 &1107036949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8245,10 +8245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be624c444122dc4eb6c3492d499bd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2479678725417178811, guid: d42bbbfa219e0ab45bdab33fc5c6dd89, type: 3}
-  minSpawnDelay: 5
-  maxSpawnDelay: 10
-  spawnOffset: 1
+  _enemyPrefab: {fileID: 2479678725417178811, guid: d42bbbfa219e0ab45bdab33fc5c6dd89, type: 3}
+  _minSpawnDelay: 5
+  _maxSpawnDelay: 10
+  _spawnOffset: 1
 --- !u!1 &1983638857
 GameObject:
   m_ObjectHideFlags: 0
@@ -9914,10 +9914,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e036ff5310265d40987fd069c7fc136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 5822539730676600708, guid: 44db51eafea8bfb4a81c4ab8bdc57656, type: 3}
-  firePoint: {fileID: 2139016236}
-  fireRate: 2
-  spriteLooksLeft: 1
+  _bulletPrefab: {fileID: 5822539730676600708, guid: 44db51eafea8bfb4a81c4ab8bdc57656, type: 3}
+  _firePoint: {fileID: 2139016236}
+  _fireRate: 2
 --- !u!1001 &2142838624768478725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10260,7 +10259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3a0dce088bdec47a60f4cc24f25905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  _moveSpeed: 5
 --- !u!114 &2378368633144395107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10273,7 +10272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484049119d1cab64aa769ac926425901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  _maxHealth: 5
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10287,7 +10286,7 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 620458695}
   - {fileID: 2378368633144395101}
-  - {fileID: 1912096758}
   - {fileID: 1036547970}
   - {fileID: 974226607}
   - {fileID: 16174375}
+  - {fileID: 1912096758}

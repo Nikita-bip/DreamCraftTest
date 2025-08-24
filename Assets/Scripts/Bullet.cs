@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 12f;
-    public float lifetime = 2f;
-    public int damage = 1;
+    [SerializeField] private float _speed = 25f;
+    [SerializeField] private float _lifetime = 10f;
+    [SerializeField] private int _damage = 1;
 
     private Vector2 direction;
 
-    void Start()
+    private void Start()
     {
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, _lifetime);
     }
 
     public void SetDirection(Vector2 dir)
@@ -18,17 +18,17 @@ public class Bullet : MonoBehaviour
         direction = dir.normalized;
     }
 
-    void Update()
+    private void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        transform.Translate(direction * _speed * Time.deltaTime, Space.World);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         EnemyHealth enemy = other.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(_damage);
             Destroy(gameObject);
         }
     }
