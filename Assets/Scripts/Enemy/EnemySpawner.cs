@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject[] _enemyPrefabs;
     [SerializeField] private float _minSpawnDelay = 5f;
     [SerializeField] private float _maxSpawnDelay = 10f;
     [SerializeField] private float _spawnOffset = 1f;
@@ -30,8 +30,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Vector3 spawnPosition = Vector3.zero;
+        if (_enemyPrefabs.Length == 0) return;
 
+        GameObject enemyPrefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
+
+        Vector3 spawnPosition = Vector3.zero;
         int side = Random.Range(0, 4);
 
         float camHeight = 2f * _mainCamera.orthographicSize;
@@ -69,10 +72,11 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
 
-        Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 
     public void StopSpawning() => _spawning = false;
+
     public void StartSpawning()
     {
         if (!_spawning)
