@@ -32,9 +32,12 @@ public class AssaultRifle : WeaponBase
 
     private void FireBulletDirect()
     {
-        if (bulletPrefab == null || firePoint == null) return;
+        if (firePoint == null) return;
 
-        GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletObj = BulletPool.Instance.GetBullet();
+        bulletObj.transform.position = firePoint.position;
+        bulletObj.transform.rotation = firePoint.rotation;
+
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {

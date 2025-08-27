@@ -5,7 +5,6 @@ public abstract class WeaponBase : MonoBehaviour
     public string weaponName;
     public float fireRate = 0.5f;
     public Transform firePoint;
-    public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
 
     protected float nextFireTime;
@@ -37,10 +36,7 @@ public abstract class WeaponBase : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle + angleOffset);
 
         Vector3 localScale = transform.localScale;
-        if (angle + angleOffset > 90 || angle + angleOffset < -90)
-            localScale.y = -Mathf.Abs(localScale.y);
-        else
-            localScale.y = Mathf.Abs(localScale.y);
+        localScale.y = (angle + angleOffset > 90 || angle + angleOffset < -90) ? -Mathf.Abs(localScale.y) : Mathf.Abs(localScale.y);
         transform.localScale = localScale;
     }
 
@@ -48,7 +44,10 @@ public abstract class WeaponBase : MonoBehaviour
     {
         if (Time.time < nextFireTime) return;
 
-        GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletObj = BulletPool.Instance.GetBullet();
+        bulletObj.transform.position = firePoint.position;
+        bulletObj.transform.rotation = firePoint.rotation;
+
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null)
         {

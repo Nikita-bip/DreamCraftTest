@@ -12,15 +12,20 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        Destroy(gameObject, lifetime);
+        Invoke(nameof(ReturnToPool), lifetime);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+        rb.velocity = Vector2.zero;
     }
 
     public void Launch(Vector2 direction, float speed)
     {
-        if (rb != null)
-            rb.velocity = direction * speed;
+        rb.velocity = direction * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,10 +34,15 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
         if (other.CompareTag("Wall"))
-            Destroy(gameObject);
+            ReturnToPool();
+    }
+
+    private void ReturnToPool()
+    {
+        BulletPool.Instance.ReturnBullet(gameObject);
     }
 }
