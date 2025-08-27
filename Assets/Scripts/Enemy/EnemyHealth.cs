@@ -3,31 +3,29 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Header("Health Settings")]
-    [SerializeField] private int _maxHealth = 5;
-
-    [Header("UI Elements")]
-    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private Slider healthSlider;
 
     private int _currentHealth;
 
     private void Start()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = maxHealth;
+        UpdateHealthUI();
+    }
+
+    public void ResetHealth()
+    {
+        _currentHealth = maxHealth;
         UpdateHealthUI();
     }
 
     private void UpdateHealthUI()
     {
-        if (_healthSlider != null)
+        if (healthSlider != null)
         {
-            _healthSlider.value = (float)_currentHealth / _maxHealth;
+            healthSlider.value = (float)_currentHealth / maxHealth;
         }
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
     }
 
     public void TakeDamage(int damage)
@@ -40,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            Die();
+            gameObject.SetActive(false);
         }
     }
 }

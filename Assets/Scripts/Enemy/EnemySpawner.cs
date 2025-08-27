@@ -3,13 +3,12 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _enemyPrefabs;
-    [SerializeField] private float _minSpawnDelay = 5f;
-    [SerializeField] private float _maxSpawnDelay = 10f;
-    [SerializeField] private float _spawnOffset = 1f;
+    [SerializeField] private float minSpawnDelay = 5f;
+    [SerializeField] private float maxSpawnDelay = 10f;
+    [SerializeField] private float spawnOffset = 1f;
 
     private Camera _mainCamera;
-    private bool _spawning = true;
+    private bool _isSpawning = true;
 
     private void Start()
     {
@@ -19,21 +18,31 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (_spawning)
+        while (_isSpawning)
         {
             SpawnEnemy();
 
-            float delay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
+            float delay = Random.Range(minSpawnDelay, maxSpawnDelay);
             yield return new WaitForSeconds(delay);
         }
     }
 
     private void SpawnEnemy()
     {
-        if (_enemyPrefabs.Length == 0) return;
+        GameObject enemyObj = EnemyPool.Instance.GetEnemy();
+        enemyObj.transform.position = GetSpawnPosition();
+        enemyObj.transform.rotation = Quaternion.identity;
+        enemyObj.SetActive(true);
 
-        GameObject enemyPrefab = _enemyPrefabs[Random.Range(0, _enemyPrefabs.Length)];
+        EnemyHealth health = enemyObj.GetComponent<EnemyHealth>();
+        if (health != null)
+        {
+            health.SendMessage("ResetHealth", SendMessageOptions.DontRequireReceiver);
+        }
+    }
 
+    private Vector3 GetSpawnPosition()
+    {
         Vector3 spawnPosition = Vector3.zero;
         int side = Random.Range(0, 4);
 
@@ -45,43 +54,43 @@ public class EnemySpawner : MonoBehaviour
             case 0: // верх
                 spawnPosition = new Vector3(
                     Random.Range(_mainCamera.transform.position.x - camWidth / 2, _mainCamera.transform.position.x + camWidth / 2),
-                    _mainCamera.transform.position.y + camHeight / 2 + _spawnOffset,
+                    _mainCamera.transform.position.y + camHeight / 2 + spawnOffset,
                     0
                 );
                 break;
             case 1: // низ
                 spawnPosition = new Vector3(
                     Random.Range(_mainCamera.transform.position.x - camWidth / 2, _mainCamera.transform.position.x + camWidth / 2),
-                    _mainCamera.transform.position.y - camHeight / 2 - _spawnOffset,
+                    _mainCamera.transform.position.y - camHeight / 2 - spawnOffset,
                     0
                 );
                 break;
             case 2: // лево
                 spawnPosition = new Vector3(
-                    _mainCamera.transform.position.x - camWidth / 2 - _spawnOffset,
+                    _mainCamera.transform.position.x - camWidth / 2 - spawnOffset,
                     Random.Range(_mainCamera.transform.position.y - camHeight / 2, _mainCamera.transform.position.y + camHeight / 2),
                     0
                 );
                 break;
             case 3: // право
                 spawnPosition = new Vector3(
-                    _mainCamera.transform.position.x + camWidth / 2 + _spawnOffset,
+                    _mainCamera.transform.position.x + camWidth / 2 + spawnOffset,
                     Random.Range(_mainCamera.transform.position.y - camHeight / 2, _mainCamera.transform.position.y + camHeight / 2),
                     0
                 );
                 break;
         }
 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        return spawnPosition;
     }
 
-    public void StopSpawning() => _spawning = false;
+    public void StopSpawning() => _isSpawning = false;
 
     public void StartSpawning()
     {
-        if (!_spawning)
+        if (!_isSpawning)
         {
-            _spawning = true;
+            _isSpawning = true;
             StartCoroutine(SpawnRoutine());
         }
     }
