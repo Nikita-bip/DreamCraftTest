@@ -8171,10 +8171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdc3eea5e631be418517168e3ab6e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 2479678725417178811, guid: daa1a01b32f253343bfb6d1bfcbc805d, type: 3}
+  _enemyPrefabs:
   - {fileID: 2479678725417178811, guid: d42bbbfa219e0ab45bdab33fc5c6dd89, type: 3}
-  poolSizePerType: 5
+  - {fileID: 2479678725417178811, guid: daa1a01b32f253343bfb6d1bfcbc805d, type: 3}
+  _poolSizePerType: 5
 --- !u!4 &1584076578
 Transform:
   m_ObjectHideFlags: 0
